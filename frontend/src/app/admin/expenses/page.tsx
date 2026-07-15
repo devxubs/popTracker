@@ -11,10 +11,11 @@ import {
    TableBody,
    TableRow,
    TableCell,
-   IconButton,
    Chip,
    CircularProgress,
    Alert,
+   useTheme,
+   alpha,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/EditOutlined";
@@ -27,6 +28,7 @@ import ConfirmDialog from "@/components/common/ConfirmDialog";
 import ActionMenu from "@/components/common/ActionMenu";
 
 export default function ExpensesPage() {
+   const theme = useTheme();
    const [expenses, setExpenses] = useState<Expense[]>([]);
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState("");
@@ -78,7 +80,7 @@ export default function ExpensesPage() {
       await fetchExpenses();
    };
 
-   const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
+   const totalExpenses = expenses.reduce((sum, e) => sum + Number(e.amount), 0);
 
    return (
       <Box>
@@ -112,9 +114,24 @@ export default function ExpensesPage() {
                   <CircularProgress />
                </Box>
             ) : (
-               <Table>
+               <Table sx={{ overflow: "hidden" }}>
                   <TableHead>
-                     <TableRow>
+                     <TableRow
+                        sx={{
+                           "& th": {
+                              backgroundColor: alpha(
+                                 theme.palette.primary.main,
+                                 0.1,
+                              ),
+                           },
+                           "& :first-of-type": {
+                              borderTopLeftRadius: 12,
+                           },
+                           "& :last-child": {
+                              borderTopRightRadius: 12,
+                           },
+                        }}
+                     >
                         <TableCell>Category</TableCell>
                         <TableCell align="right">Amount</TableCell>
                         <TableCell>Note</TableCell>

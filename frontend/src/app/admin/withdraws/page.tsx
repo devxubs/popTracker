@@ -11,9 +11,10 @@ import {
    TableBody,
    TableRow,
    TableCell,
-   IconButton,
    CircularProgress,
    Alert,
+   alpha,
+   useTheme,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/DeleteOutline";
@@ -25,6 +26,7 @@ import ConfirmDialog from "@/components/common/ConfirmDialog";
 import ActionMenu from "@/components/common/ActionMenu";
 
 export default function WithdrawsPage() {
+   const theme = useTheme();
    const [withdraws, setWithdraws] = useState<Withdraw[]>([]);
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState("");
@@ -61,7 +63,10 @@ export default function WithdrawsPage() {
       await fetchWithdraws();
    };
 
-   const totalWithdraw = withdraws.reduce((sum, w) => sum + w.amount, 0);
+   const totalWithdraw = withdraws.reduce(
+      (sum, w) => sum + Number(w.amount),
+      0,
+   );
 
    return (
       <Box>
@@ -97,7 +102,22 @@ export default function WithdrawsPage() {
             ) : (
                <Table>
                   <TableHead>
-                     <TableRow>
+                     <TableRow
+                        sx={{
+                           "& th": {
+                              backgroundColor: alpha(
+                                 theme.palette.primary.main,
+                                 0.1,
+                              ),
+                           },
+                           "& :first-of-type": {
+                              borderTopLeftRadius: 12,
+                           },
+                           "& :last-child": {
+                              borderTopRightRadius: 12,
+                           },
+                        }}
+                     >
                         <TableCell>Partner</TableCell>
                         <TableCell align="right">Amount</TableCell>
                         <TableCell>Date</TableCell>

@@ -24,13 +24,13 @@ export const SIDEBAR_WIDTH = 240;
 
 // Single source of truth for nav items — add a module here and it shows up in the sidebar
 const navItems = [
-   { label: "Dashboard", href: "/", icon: <DashboardIcon /> },
-   { label: "Products", href: "/products", icon: <Inventory2Icon /> },
-   { label: "Sales", href: "/sales", icon: <PointOfSaleIcon /> },
-   { label: "Expenses", href: "/expenses", icon: <ReceiptLongIcon /> },
-   { label: "Investments", href: "/investments", icon: <SavingsIcon /> },
-   { label: "Withdraws", href: "/withdraws", icon: <PaymentsIcon /> },
-   { label: "Reports", href: "/reports", icon: <AssessmentIcon /> },
+   { label: "Dashboard", href: "/admin/dashboard", icon: <DashboardIcon /> },
+   { label: "Products", href: "/admin/products", icon: <Inventory2Icon /> },
+   { label: "Sales", href: "/admin/sales", icon: <PointOfSaleIcon /> },
+   { label: "Expenses", href: "/admin/expenses", icon: <ReceiptLongIcon /> },
+   { label: "Investments", href: "/admin/investments", icon: <SavingsIcon /> },
+   { label: "Withdraws", href: "/admin/withdraws", icon: <PaymentsIcon /> },
+   { label: "Reports", href: "/admin/reports", icon: <AssessmentIcon /> },
 ];
 
 export default function Sidebar() {

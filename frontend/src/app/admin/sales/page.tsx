@@ -14,6 +14,8 @@ import {
    IconButton,
    CircularProgress,
    Alert,
+   alpha,
+   useTheme,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/DeleteOutline";
@@ -26,6 +28,7 @@ import ConfirmDialog from "@/components/common/ConfirmDialog";
 import ActionMenu from "@/components/common/ActionMenu";
 
 export default function SalesPage() {
+   const theme = useTheme();
    const [sales, setSales] = useState<Sale[]>([]);
    const [products, setProducts] = useState<Product[]>([]);
    const [loading, setLoading] = useState(true);
@@ -67,7 +70,7 @@ export default function SalesPage() {
       await fetchData();
    };
 
-   const totalSales = sales.reduce((sum, s) => sum + s.totalPrice, 0);
+   const totalSales = sales.reduce((sum, s) => sum + Number(s.totalPrice), 0);
 
    return (
       <Box>
@@ -109,7 +112,22 @@ export default function SalesPage() {
             ) : (
                <Table>
                   <TableHead>
-                     <TableRow>
+                     <TableRow
+                        sx={{
+                           "& th": {
+                              backgroundColor: alpha(
+                                 theme.palette.primary.main,
+                                 0.1,
+                              ),
+                           },
+                           "& :first-of-type": {
+                              borderTopLeftRadius: 12,
+                           },
+                           "& :last-child": {
+                              borderTopRightRadius: 12,
+                           },
+                        }}
+                     >
                         <TableCell>Product</TableCell>
                         <TableCell align="right">Quantity</TableCell>
                         <TableCell align="right">Sell Price</TableCell>

@@ -70,7 +70,6 @@ export default function InvestmentFormDialog({
                   onChange={(e) => setAmount(Number(e.target.value))}
                   fullWidth
                   required
-                  inputProps={{ min: 0.01, step: "0.01" }}
                />
                <TextField
                   label="Date"

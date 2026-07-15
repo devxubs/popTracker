@@ -15,6 +15,9 @@ import {
    Chip,
    CircularProgress,
    Alert,
+   alpha,
+   useTheme,
+   Tooltip,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { Product } from "@/types";
@@ -29,6 +32,7 @@ import { DeleteOutlineOutlined } from "@mui/icons-material";
 const LOW_STOCK_THRESHOLD = 5;
 
 export default function ProductsPage() {
+   const theme = useTheme();
    const [products, setProducts] = useState<Product[]>([]);
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState("");
@@ -114,7 +118,22 @@ export default function ProductsPage() {
             ) : (
                <Table>
                   <TableHead>
-                     <TableRow>
+                     <TableRow
+                        sx={{
+                           "& th": {
+                              backgroundColor: alpha(
+                                 theme.palette.primary.main,
+                                 0.1,
+                              ),
+                           },
+                           "& :first-of-type": {
+                              borderTopLeftRadius: 12,
+                           },
+                           "& :last-child": {
+                              borderTopRightRadius: 12,
+                           },
+                        }}
+                     >
                         <TableCell>Name</TableCell>
                         <TableCell align="right">Buy Price</TableCell>
                         <TableCell align="right">Sell Price</TableCell>
@@ -137,13 +156,22 @@ export default function ProductsPage() {
                               {formatCurrency(p.sellPrice)}
                            </TableCell>
                            <TableCell align="right">
-                              {p.stock}
-                              {p.stock <= LOW_STOCK_THRESHOLD && (
+                              {/* {} */}
+                              {p.stock <= LOW_STOCK_THRESHOLD ? (
+                                 <Tooltip title="Low Stock">
+                                    <Chip
+                                       label={p.stock.toString()}
+                                       color="warning"
+                                       size="small"
+                                       variant="outlined"
+                                    />
+                                 </Tooltip>
+                              ) : (
                                  <Chip
-                                    label="Low Stock"
-                                    color="warning"
+                                    label={p.stock.toString()}
+                                    color="primary"
                                     size="small"
-                                    sx={{ ml: 1 }}
+                                    variant="outlined"
                                  />
                               )}
                            </TableCell>

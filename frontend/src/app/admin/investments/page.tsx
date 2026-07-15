@@ -14,6 +14,8 @@ import {
    IconButton,
    CircularProgress,
    Alert,
+   alpha,
+   useTheme,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/DeleteOutline";
@@ -28,6 +30,7 @@ import ConfirmDialog from "@/components/common/ConfirmDialog";
 import ActionMenu from "@/components/common/ActionMenu";
 
 export default function InvestmentsPage() {
+   const theme = useTheme();
    const [investments, setInvestments] = useState<Investment[]>([]);
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState("");
@@ -64,7 +67,10 @@ export default function InvestmentsPage() {
       await fetchInvestments();
    };
 
-   const totalInvestment = investments.reduce((sum, i) => sum + i.amount, 0);
+   const totalInvestment = investments.reduce(
+      (sum, i) => sum + Number(i.amount),
+      0,
+   );
 
    return (
       <Box>
@@ -100,7 +106,22 @@ export default function InvestmentsPage() {
             ) : (
                <Table>
                   <TableHead>
-                     <TableRow>
+                     <TableRow
+                        sx={{
+                           "& th": {
+                              backgroundColor: alpha(
+                                 theme.palette.primary.main,
+                                 0.1,
+                              ),
+                           },
+                           "& :first-of-type": {
+                              borderTopLeftRadius: 12,
+                           },
+                           "& :last-child": {
+                              borderTopRightRadius: 12,
+                           },
+                        }}
+                     >
                         <TableCell>Partner</TableCell>
                         <TableCell align="right">Amount</TableCell>
                         <TableCell>Date</TableCell>
