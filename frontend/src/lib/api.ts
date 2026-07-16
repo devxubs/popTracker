@@ -6,10 +6,10 @@ import axios from "axios";
  * a different backend in staging/production without code changes.
  */
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api",
-  headers: {
-    "Content-Type": "application/json",
-  },
+   baseURL: process.env.NEXT_PUBLIC_API_URL,
+   headers: {
+      "Content-Type": "application/json",
+   },
 });
 
 export default api;
