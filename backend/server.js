@@ -21,10 +21,7 @@ const app = express();
 // Middleware
 app.use(
    cors({
-      origin: [
-         process.env.CLIENT_URL || "http://localhost:3000",
-         "https://pop-tracker-seven.vercel.app",
-      ],
+      origin: [process.env.CLIENT_URL, "https://pop-tracker-seven.vercel.app"],
       credentials: true,
    }),
 );
