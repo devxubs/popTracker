@@ -6,7 +6,9 @@ import axios from "axios";
  * a different backend in staging/production without code changes.
  */
 const api = axios.create({
-   baseURL: process.env.NEXT_PUBLIC_API_URL,
+   baseURL:
+      process.env.NEXT_PUBLIC_API_URL ||
+      "https://poptracker-backend.onrender.com/api",
    headers: {
       "Content-Type": "application/json",
    },
