@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AppThemeProvider } from "@/theme/ThemeProvider";
 
 export const metadata: Metadata = {
-   title: "BizTracker | Expense & Profit Tracker",
+   title: "POP Tracker | Expense & Profit Tracker",
    description: "Business Expense & Profit Tracker for two partners",
 };
 
