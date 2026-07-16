@@ -4,7 +4,7 @@ import { lightShadows, darkShadows } from "./shadow";
 import darkPalette from "./darkPalette";
 import lightPalette from "./lightPalette";
 
-export const getAppTheme = (mode: "light" | "dark") =>
+export const getAppTheme = (mode: "light" | "dark" = "dark") =>
    createTheme({
       palette: {
          ...(mode === "light" ? { ...lightPalette } : { ...darkPalette }),
