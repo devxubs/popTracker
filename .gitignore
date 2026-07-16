@@ -27,7 +27,6 @@ pnpm-debug.log*
 # ===============================
 dist/
 build/
-.next/
 out/
 coverage/
 
