@@ -16,11 +16,15 @@ const Form = () => {
    const users = [
       {
          username: "devxub",
-         password: encryptPassword("jubayer"),
+         password: encryptPassword("pop.tracker.devxub"),
       },
       {
          username: "siam",
          password: encryptPassword("pop.tracker.siam"),
+      },
+      {
+         username: "demo",
+         password: encryptPassword("demo"),
       },
    ];
 
@@ -89,7 +93,7 @@ const Form = () => {
 
    return (
       <StyledWrapper>
-         <div className="main">
+         {/* <div className="main">
             <form className="form" onSubmit={handleLogin}>
                <p id="heading">Login</p>
                <div className="field">
@@ -148,6 +152,47 @@ const Form = () => {
                   </p>
                )}
             </form>
+         </div> */}
+         <div className="main">
+            <form className="form" onSubmit={handleLogin}>
+               <span className="input-span">
+                  <label htmlFor="email" className="label">
+                     Email
+                  </label>
+                  <input
+                     type="text"
+                     name="email"
+                     id="email"
+                     value={username}
+                     onChange={(e) => setUsername(e.target.value)}
+                  />
+               </span>
+               <span className="input-span">
+                  <label htmlFor="password" className="label">
+                     Password
+                  </label>
+                  <input
+                     type="password"
+                     name="password"
+                     id="password"
+                     value={password}
+                     onChange={(e) => setPassword(e.target.value)}
+                  />
+               </span>
+
+               <input className="submit" type="submit" defaultValue="Log in" />
+               {error && (
+                  <p
+                     style={{
+                        color: "#ff4d4f",
+                        textAlign: "center",
+                        marginTop: "10px",
+                     }}
+                  >
+                     {error}
+                  </p>
+               )}
+            </form>
          </div>
       </StyledWrapper>
    );
@@ -162,82 +207,77 @@ const StyledWrapper = styled.div`
    }
 
    .form {
+      --bg-light: #efefef;
+      --bg-dark: #707070;
+      --clr: #58bc82;
+      --clr-alpha: #9c9c9c60;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      padding-left: 2em;
-      padding-right: 2em;
-      padding-bottom: 0.4em;
-      background-color: #171717;
-      border-radius: 25px;
-      transition: 0.4s ease-in-out;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      max-width: 300px;
    }
 
-   .form:hover {
-      transform: scale(1.05);
-      border: 1px solid black;
+   .form .input-span {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
    }
 
-   #heading {
-      text-align: center;
-      margin: 2em;
-      color: rgb(255, 255, 255);
-      font-size: 1.2em;
-   }
-
-   .field {
+   .form input[type="text"],
+   .form input[type="password"] {
+      border-radius: 0.5rem;
+      padding: 1rem 0.75rem;
+      width: 100%;
+      border: none;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 0.5em;
-      border-radius: 25px;
-      padding: 0.6em;
-      border: none;
-      outline: none;
-      color: white;
-      background-color: #171717;
-      box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+      gap: 0.5rem;
+      background-color: var(--clr-alpha);
+      outline: 2px solid var(--bg-dark);
    }
 
-   .input-icon {
-      height: 1.3em;
-      width: 1.3em;
-      fill: white;
+   .form input[type="text"]:focus,
+   .form input[type="password"]:focus {
+      outline: 2px solid var(--clr);
    }
 
-   .input-field {
-      background: none;
-      border: none;
-      outline: none;
+   .label {
+      align-self: flex-start;
+      color: var(--clr);
+      font-weight: 600;
+   }
+
+   .form .submit {
+      padding: 1rem 0.75rem;
       width: 100%;
-      color: #d3d3d3;
-   }
-
-   .form .btn {
       display: flex;
-      justify-content: center;
-      flex-direction: row;
-      margin-top: 2.5em;
-   }
-
-   .button1 {
-      padding: 0.5em;
-      padding-left: 1.1em;
-      padding-right: 1.1em;
-      border-radius: 5px;
-      margin-right: 0.5em;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: 3rem;
+      background-color: var(--bg-dark);
+      color: var(--bg-light);
       border: none;
-      outline: none;
-      transition: 0.4s ease-in-out;
-      background-color: #252525;
-      color: white;
-      margin-bottom: 3em;
       cursor: pointer;
+      transition: all 300ms;
+      font-weight: 600;
+      font-size: 0.9rem;
    }
 
-   .button1:hover {
-      background-color: black;
-      color: white;
+   .form .submit:hover {
+      background-color: var(--clr);
+      color: var(--bg-dark);
+   }
+
+   .span {
+      text-decoration: none;
+      color: var(--bg-dark);
+   }
+
+   .span a {
+      color: var(--clr);
    }
 `;
 

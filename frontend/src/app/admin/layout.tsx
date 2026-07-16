@@ -1,24 +1,37 @@
 "use client";
 
-import DashboardLayout from "@/components/layout/DashboardLayout";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import DashboardLayout from "@/components/layout/DashboardLayout";
 
-export default function RootLayout({
+export default function AdminLayout({
    children,
 }: {
    children: React.ReactNode;
 }) {
-   // if (typeof window === "undefined") {
-   //    return null;
-   // }
-
    const router = useRouter();
-   const user = sessionStorage.getItem("user");
 
-   if (!user) {
-      router.push("/auth/login");
+   const [loading, setLoading] = useState(true);
+   const [authenticated, setAuthenticated] = useState(false);
 
-      return;
+   useEffect(() => {
+      const user = sessionStorage.getItem("user");
+
+      if (!user) {
+         router.replace("/auth/login");
+      } else {
+         setAuthenticated(true);
+      }
+
+      setLoading(false);
+   }, [router]);
+
+   if (loading) {
+      return null; // অথবা Loader
+   }
+
+   if (!authenticated) {
+      return null;
    }
 
    return <DashboardLayout>{children}</DashboardLayout>;

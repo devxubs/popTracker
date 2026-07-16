@@ -9,16 +9,17 @@ import {
    Avatar,
    Tooltip,
    Chip,
+   alpha,
 } from "@mui/material";
 import DarkModeIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeIcon from "@mui/icons-material/LightModeOutlined";
 import { useThemeMode } from "@/theme/ThemeProvider";
 import { SIDEBAR_WIDTH } from "./Sidebar";
-import { useTranslation } from "react-i18next";
+
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 export default function Topbar() {
-   const { mode, toggleMode } = useThemeMode();
-   const { i18n } = useTranslation();
+   // const { mode, toggleMode } = useThemeMode();
 
    return (
       <AppBar
@@ -30,7 +31,8 @@ export default function Topbar() {
             ml: { md: `${SIDEBAR_WIDTH}px` },
             borderBottom: "1px solid",
             borderColor: "divider",
-            bgcolor: "background.paper",
+            bgcolor: (t) => alpha(t.palette.background.default, 0.4),
+            backdropFilter: "blur(10px)",
          }}
       >
          <Toolbar sx={{ justifyContent: "flex-end", gap: 1 }}>
@@ -41,25 +43,19 @@ export default function Topbar() {
                      : "Switch to light mode"
                }
             >
-               <Chip
-                  label="EN"
-                  size="small"
-                  onClick={() => {
-                     const lang = localStorage.getItem("lang");
-                     i18n.changeLanguage("bn");
-                     localStorage.setItem("lang", lang === "en" ? "bn" : "en");
-                  }}
-               />
-            </Tooltip> */}
-            <Tooltip
-               title={
-                  mode === "light"
-                     ? "Switch to dark mode"
-                     : "Switch to light mode"
-               }
-            >
                <IconButton onClick={toggleMode} color="inherit">
                   {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+               </IconButton>
+            </Tooltip> */}
+            <Tooltip title={"Logout"}>
+               <IconButton
+                  onClick={() => {
+                     sessionStorage.removeItem("user");
+                     window.location.href = "/auth/login";
+                  }}
+                  color="inherit"
+               >
+                  <LogoutOutlinedIcon />
                </IconButton>
             </Tooltip>
             <Box>
